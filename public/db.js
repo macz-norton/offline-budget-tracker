@@ -1,3 +1,5 @@
+const { get } = require("mongoose");
+
 let db;
 
 const request = indexedDB.open("budget", 1);
@@ -34,4 +36,41 @@ function saveRecord(record) {
 
     pendingListStore.add(record);
 
-}
+};
+
+function checkDatabase() {
+
+    const transaction = db.transaction(["pendingList"], "readwrite");
+    const pendingListStore = transaciton.objectStore("pendingList");
+
+    const getAll = pendingListStore.getAll();
+
+    getAll.onsuccess = function() {
+        
+        if (getAll.result.length > 0) {
+
+            fetch("/api/transaction/bulk", {
+
+                method: "POST",
+                body: JSON.stringify(getAll.result),
+                headers: {
+                    Accept: "applicaiton/json, text/plain, */*",
+                    "Content-Type": "application/json"
+
+                }
+
+            })
+
+            .then((response) => response.json())
+
+            .then(() => {
+
+                const transaction = db.transaction(["pendingList"], "readwrite");
+                const pendingListStore = transaction.objectStore("pendingList");
+                pendingListStore.clear();
+
+            });
+        };
+    };
+
+};
