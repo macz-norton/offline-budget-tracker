@@ -1,5 +1,3 @@
-const { get } = require("mongoose");
-
 let db;
 
 const request = indexedDB.open("budget", 1);
@@ -41,7 +39,7 @@ function saveRecord(record) {
 function checkDatabase() {
 
     const transaction = db.transaction(["pendingList"], "readwrite");
-    const pendingListStore = transaciton.objectStore("pendingList");
+    const pendingListStore = transaction.objectStore("pendingList");
 
     const getAll = pendingListStore.getAll();
 
@@ -54,7 +52,7 @@ function checkDatabase() {
                 method: "POST",
                 body: JSON.stringify(getAll.result),
                 headers: {
-                    Accept: "applicaiton/json, text/plain, */*",
+                    Accept: "application/json, text/plain, */*",
                     "Content-Type": "application/json"
 
                 }
