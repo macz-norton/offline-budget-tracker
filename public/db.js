@@ -26,3 +26,12 @@ request.onerror = function(event) {
     console.log("You have an error");
 
 };
+
+function saveRecord(record) {
+
+    const transaction = db.transaction(["pendingList"], "readwrite");
+    const pendingListStore = transaction.objectStore("pendingList");
+
+    pendingListStore.add(record);
+
+}
