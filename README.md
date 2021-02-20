@@ -25,9 +25,9 @@ No installation required.
 
 ## Usage
 
-* Link to the deployed application: 
+* Link to the deployed application: https://frozen-eyrie-21915.herokuapp.com/
 * Gif that demonstrates the application's functionality:
-![Gif]()
+![Gif](https://user-images.githubusercontent.com/71162422/108600996-09441700-734f-11eb-9733-3e9241d019de.gif)
 
 ## Tests
 
@@ -38,6 +38,7 @@ The application allows users to:
 
 
 ## Credits
+
 * [Express.js](https://expressjs.com/)
 * [Heroku](https://heroku.com/)
 * [MongoDB](https://www.mongodb.com/)
